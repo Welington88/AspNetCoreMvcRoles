@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AspNetCoreMySql.Models
+namespace AspNetMvcRoles.Models
 {
-    [Table("Colaborador")]
+    [Table("Cadastro")]
     public class Usuarios
     {
         [Key]

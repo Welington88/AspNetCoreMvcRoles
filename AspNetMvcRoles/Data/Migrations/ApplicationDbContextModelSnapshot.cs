@@ -14,7 +14,164 @@ namespace AspNetMvcRoles.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0");
+                .HasAnnotation("ProductVersion", "5.0.13");
+
+            modelBuilder.Entity("AspNetMvcRoles.Models.Cargo", b =>
+                {
+                    b.Property<int>("IdCargo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("IdSetor")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("SetoresIdSetor")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("IdCargo");
+
+                    b.HasIndex("SetoresIdSetor");
+
+                    b.ToTable("Cargo");
+                });
+
+            modelBuilder.Entity("AspNetMvcRoles.Models.Funcinario", b =>
+                {
+                    b.Property<int>("Matricula")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Admissao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Endereco")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Gestor")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IdCargo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IdSetor")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<float>("Salario")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Matricula");
+
+                    b.HasIndex("IdCargo");
+
+                    b.HasIndex("IdSetor");
+
+                    b.ToTable("Funcionario");
+                });
+
+            modelBuilder.Entity("AspNetMvcRoles.Models.Regras", b =>
+                {
+                    b.Property<int>("IdRegra")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("IdRegra");
+
+                    b.ToTable("Regras");
+                });
+
+            modelBuilder.Entity("AspNetMvcRoles.Models.Sedes", b =>
+                {
+                    b.Property<int>("IdSede")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Aluguel")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DataAbertura")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("Descr_Sede");
+
+                    b.Property<decimal>("ValorDaSede")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("IdSede");
+
+                    b.ToTable("Sedes_Empresa");
+                });
+
+            modelBuilder.Entity("AspNetMvcRoles.Models.Setor", b =>
+                {
+                    b.Property<int>("IdSetor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("IdSede")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("IdSetor");
+
+                    b.HasIndex("IdSede");
+
+                    b.ToTable("Setores");
+                });
+
+            modelBuilder.Entity("AspNetMvcRoles.Models.Usuarios", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nivel")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Usuario")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cadastro");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -26,18 +183,18 @@ namespace AspNetMvcRoles.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -78,8 +235,8 @@ namespace AspNetMvcRoles.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
@@ -91,12 +248,12 @@ namespace AspNetMvcRoles.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
@@ -114,17 +271,17 @@ namespace AspNetMvcRoles.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -155,12 +312,12 @@ namespace AspNetMvcRoles.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("TEXT");
@@ -197,12 +354,12 @@ namespace AspNetMvcRoles.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
                         .HasColumnType("TEXT");
@@ -210,6 +367,45 @@ namespace AspNetMvcRoles.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("AspNetMvcRoles.Models.Cargo", b =>
+                {
+                    b.HasOne("AspNetMvcRoles.Models.Setor", "Setores")
+                        .WithMany("Cargos")
+                        .HasForeignKey("SetoresIdSetor");
+
+                    b.Navigation("Setores");
+                });
+
+            modelBuilder.Entity("AspNetMvcRoles.Models.Funcinario", b =>
+                {
+                    b.HasOne("AspNetMvcRoles.Models.Cargo", "Cargo")
+                        .WithMany("Colaboradores")
+                        .HasForeignKey("IdCargo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AspNetMvcRoles.Models.Setor", "Setor")
+                        .WithMany("Colaboradores")
+                        .HasForeignKey("IdSetor")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cargo");
+
+                    b.Navigation("Setor");
+                });
+
+            modelBuilder.Entity("AspNetMvcRoles.Models.Setor", b =>
+                {
+                    b.HasOne("AspNetMvcRoles.Models.Sedes", "Sedes")
+                        .WithMany("Setores")
+                        .HasForeignKey("IdSede")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sedes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -261,6 +457,23 @@ namespace AspNetMvcRoles.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AspNetMvcRoles.Models.Cargo", b =>
+                {
+                    b.Navigation("Colaboradores");
+                });
+
+            modelBuilder.Entity("AspNetMvcRoles.Models.Sedes", b =>
+                {
+                    b.Navigation("Setores");
+                });
+
+            modelBuilder.Entity("AspNetMvcRoles.Models.Setor", b =>
+                {
+                    b.Navigation("Cargos");
+
+                    b.Navigation("Colaboradores");
                 });
 #pragma warning restore 612, 618
         }

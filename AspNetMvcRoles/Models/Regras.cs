@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ApsNetCore.Models
+namespace AspNetMvcRoles.Models
 {
     [Table("Regras")]
     public class Regras
@@ -10,7 +10,7 @@ namespace ApsNetCore.Models
         [Key]
         public int IdRegra { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = " O Campo {0} é Obrigatório!")]
         public String Name { get; set; }
     }
 }

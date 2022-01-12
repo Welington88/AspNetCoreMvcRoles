@@ -1,15 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetMvcRoles.Data;
 using AspNetMvcRoles.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AspNetMvcRoles.Controllers
 {
+    [Authorize]
     public class CargosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +22,8 @@ namespace AspNetMvcRoles.Controllers
         // GET: Cargos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cargo.ToListAsync());
+            var applicationDbContext = _context.Cargo.Include(c => c.Setor);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Cargos/Details/5
@@ -34,18 +35,20 @@ namespace AspNetMvcRoles.Controllers
             }
 
             var cargo = await _context.Cargo
+                .Include(c => c.Setor)
                 .FirstOrDefaultAsync(m => m.IdCargo == id);
             if (cargo == null)
             {
                 return NotFound();
             }
-
+            
             return View(cargo);
         }
 
         // GET: Cargos/Create
         public IActionResult Create()
         {
+            ViewData["IdSetor"] = new SelectList(_context.Setor, "IdSetor", "Descricao");
             return View();
         }
 
@@ -62,6 +65,7 @@ namespace AspNetMvcRoles.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdSetor"] = new SelectList(_context.Setor, "IdSetor", "Descricao", cargo.IdSetor);
             return View(cargo);
         }
 
@@ -78,6 +82,7 @@ namespace AspNetMvcRoles.Controllers
             {
                 return NotFound();
             }
+            ViewData["IdSetor"] = new SelectList(_context.Setor, "IdSetor", "Descricao", cargo.IdSetor);
             return View(cargo);
         }
 
@@ -113,6 +118,7 @@ namespace AspNetMvcRoles.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdSetor"] = new SelectList(_context.Setor, "IdSetor", "Descricao", cargo.IdSetor);
             return View(cargo);
         }
 
@@ -125,12 +131,13 @@ namespace AspNetMvcRoles.Controllers
             }
 
             var cargo = await _context.Cargo
+                .Include(c => c.Setor)
                 .FirstOrDefaultAsync(m => m.IdCargo == id);
             if (cargo == null)
             {
                 return NotFound();
             }
-
+            ViewData["IdSetor"] = new SelectList(_context.Setor, "IdSetor", "Descricao", cargo.IdSetor);
             return View(cargo);
         }
 

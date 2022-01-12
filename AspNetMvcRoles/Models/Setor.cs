@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace ApsNet.Models
+namespace AspNetMvcRoles.Models
 {
-    [Table("Setor")]
+    [Table("Setores")]
     public class Setor
     {
         public Setor(){
@@ -18,8 +18,15 @@ namespace ApsNet.Models
         public String Descricao { get; set; }
 
         [JsonIgnore]
-        [ForeignKey("SetorRefId")]
-        public virtual ICollection<Funcinario> Colaboradores { get; set; }
+        public virtual ICollection<Cargo> Cargos { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Funcinario> Funcinarios { get; set; }
+
+        [ForeignKey("Sedes")]
+        [Display(Name = "Código Sede")]
+        public int IdSede { get; set; }
+        public virtual Sedes Sedes { get; set; }
 
     }
     

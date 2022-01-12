@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,9 +5,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetMvcRoles.Data;
 using AspNetMvcRoles.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetMvcRoles.Controllers
 {
+    [Authorize]
     public class FuncionarioController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,8 +49,8 @@ namespace AspNetMvcRoles.Controllers
         // GET: Funcionario/Create
         public IActionResult Create()
         {
-            ViewData["IdCargo"] = new SelectList(_context.Cargo, "IdCargo", "Descricao");
-            ViewData["IdSetor"] = new SelectList(_context.Set<Setor>(), "IdSetor", "IdSetor");
+            ViewData["IdCargo"] = new SelectList(_context.Set<Cargo>(), "IdCargo", "Descricao");
+            ViewData["IdSetor"] = new SelectList(_context.Set<Setor>(), "IdSetor", "Descricao");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace AspNetMvcRoles.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCargo"] = new SelectList(_context.Cargo, "IdCargo", "Descricao", funcinario.IdCargo);
-            ViewData["IdSetor"] = new SelectList(_context.Set<Setor>(), "IdSetor", "IdSetor", funcinario.IdSetor);
+            ViewData["IdCargo"] = new SelectList(_context.Set<Cargo>(), "IdCargo", "Descricao", funcinario.IdCargo);
+            ViewData["IdSetor"] = new SelectList(_context.Set<Setor>(), "IdSetor", "Descricao", funcinario.IdSetor);
             return View(funcinario);
         }
 
@@ -85,8 +85,8 @@ namespace AspNetMvcRoles.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdCargo"] = new SelectList(_context.Cargo, "IdCargo", "Descricao", funcinario.IdCargo);
-            ViewData["IdSetor"] = new SelectList(_context.Set<Setor>(), "IdSetor", "IdSetor", funcinario.IdSetor);
+            ViewData["IdCargo"] = new SelectList(_context.Set<Cargo>(), "IdCargo", "Descricao", funcinario.IdCargo);
+            ViewData["IdSetor"] = new SelectList(_context.Set<Setor>(), "IdSetor", "Descricao", funcinario.IdSetor);
             return View(funcinario);
         }
 
@@ -122,8 +122,8 @@ namespace AspNetMvcRoles.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCargo"] = new SelectList(_context.Cargo, "IdCargo", "Descricao", funcinario.IdCargo);
-            ViewData["IdSetor"] = new SelectList(_context.Set<Setor>(), "IdSetor", "IdSetor", funcinario.IdSetor);
+            ViewData["IdCargo"] = new SelectList(_context.Set<Cargo>(), "IdCargo", "Descricao", funcinario.IdCargo);
+            ViewData["IdSetor"] = new SelectList(_context.Set<Setor>(), "IdSetor", "Descricao", funcinario.IdSetor);
             return View(funcinario);
         }
 
