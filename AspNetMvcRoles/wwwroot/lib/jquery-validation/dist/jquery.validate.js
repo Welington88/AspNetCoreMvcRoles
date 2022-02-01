@@ -1396,7 +1396,7 @@ $.extend( $.validator, {
 
 		// https://jqueryvalidation.org/date-method/
 		date: function( value, element ) {
-			return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
+			return this.optional( element ) || !/^\d\d?\/\d\d?\/\d\d\d?\d?$/.test( new Date( value ).toString() );
 		},
 
 		// https://jqueryvalidation.org/dateISO-method/
@@ -1406,7 +1406,7 @@ $.extend( $.validator, {
 
 		// https://jqueryvalidation.org/number-method/
 		number: function( value, element ) {
-			return this.optional( element ) || /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test( value );
+			return this.optional( element ) || /^(?:-?\d+|-?\d{1,3}(?:.\d{3})+)?(?:\,\d+)?$/.test( value );
 		},
 
 		// https://jqueryvalidation.org/digits-method/
@@ -1444,6 +1444,8 @@ $.extend( $.validator, {
 
 		// https://jqueryvalidation.org/range-method/
 		range: function( value, element, param ) {
+			value = value.replace(".","");
+			value = value.replace(",",".");
 			return this.optional( element ) || ( value >= param[ 0 ] && value <= param[ 1 ] );
 		},
 

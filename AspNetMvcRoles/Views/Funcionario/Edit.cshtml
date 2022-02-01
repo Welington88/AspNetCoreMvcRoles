@@ -57,6 +57,9 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+        <div id="data">
+            @Html.Hidden("Admissao")
+        </div>
     </div>
 </div>
 
@@ -66,4 +69,14 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <!-- Validar Data -->
+    <script type="text/javascript">
+        var data = document.getElementById("data").innerHTML;
+        var datatxt = data.trim();
+        var pos = datatxt.indexOf("value=");
+        var consulta = datatxt.substr(pos + 7, 10);
+        var dataptbr = InverterData(consulta);
+        document.getElementById("Admissao").value = dataptbr;
+    </script>
+    <!-- Fim Validar Data -->
 }
