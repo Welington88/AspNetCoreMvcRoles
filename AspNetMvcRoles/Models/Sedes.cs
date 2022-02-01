@@ -18,21 +18,24 @@ namespace AspNetMvcRoles.Models
 
         [Display(Name = "Descrição Sede")]
         [Column("Descr_Sede", TypeName = "varchar(50)")]
-        [Required]
+        [Required(ErrorMessage = " O Campo {0} é Obrigatório!")]
+        [StringLength(50, ErrorMessage = " O Campo {0} pode ter no máximo {1} e minimo {2} caracteres ", MinimumLength = 2)]
         public String Descricao { get; set; }
 
         [Display(Name = "É Alugada?")]
-        [Required]
+        [Required(ErrorMessage = " O Campo {0} é Obrigatório!")]
         public bool Aluguel { get; set; }
 
         [Display(Name = "Data da Abertura")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy h:m}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = " O Campo {0} é Obrigatório!")]
         public DateTime DataAbertura { get; set; }
 
         [Display(Name = "Valor da Sede")]
-        [Required]
-        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]
+        [Required(ErrorMessage = " O Campo {0} é Obrigatório!")]
+        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Currency)]
         public Decimal ValorDaSede { get; set; }
 
         [JsonIgnore]

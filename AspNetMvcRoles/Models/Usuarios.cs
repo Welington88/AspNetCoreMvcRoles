@@ -11,7 +11,7 @@ namespace AspNetMvcRoles.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = " O Campo {0} é Obrigatório!")]
         public String Nome { get; set; }
 
         [Required(ErrorMessage = " O Campo {0} é Obrigatório!")]
