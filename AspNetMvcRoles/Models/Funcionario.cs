@@ -34,9 +34,12 @@ namespace AspNetMvcRoles.Models
         public DateTime Admissao { get; set; }
 
         [Display(Name = "Salário")]
-        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "decimal(18, 2)")]
         [Required(ErrorMessage = " O Campo {0} é Obrigatório!")]
-        public float Salario { get; set; }
+        [Range(0, long.MaxValue, ErrorMessage = "Valor tem ser Maior que zero")]
+        public decimal Salario { get; set; }
 
         [Display(Name = "É Gestor")]
         [Required(ErrorMessage = " O Campo {0} é Obrigatório!")]
