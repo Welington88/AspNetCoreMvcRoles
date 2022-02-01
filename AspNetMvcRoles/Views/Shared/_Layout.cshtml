@@ -18,14 +18,20 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Funcionario" asp-action="Index">Funcionários</a>
+                        </li>
+
                         <!-- Drop down -->
                         <li class="dropdown">
                             <a class="nav-link text-dark dropdown-toggle" data-toggle="dropdown" href="#">
                                 Cadastros <span class="caret"></span>
                             </a>
+
                             <ul class="dropdown-menu">
+
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Funcionario" asp-action="Index">Funcionários</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Sedes" asp-action="Index">Sedes</a>
                                 </li>
 
                                 <li class="nav-item">
@@ -34,10 +40,6 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Cargos" asp-action="Index">Cargos</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Sedes" asp-action="Index">Sedes</a>
                                 </li>
 
                                 <li class="nav-item">

@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using AspNetMvcRoles.Data;
+using AspNetMvcRoles.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -29,8 +30,10 @@ namespace AspNetMvcRoles
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                    .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddErrorDescriber<Erro>();
+
             services.AddControllersWithViews();
         }
 
