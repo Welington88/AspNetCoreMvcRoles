@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AspNetMvcRoles.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin, Root")]
     public class CargosController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -37,8 +37,7 @@ namespace AspNetMvcRoles.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 await _roleManager.CreateAsync(new IdentityRole("Admin")); // cria regra
-                var user = await _userManager.GetUserAsync(HttpContext.User); /// pegar usuario 
-                await _roleManager.AddClaimAsync(new IdentityRole("Admin"), new Claim(ClaimTypes.Name, user.UserName));                                                           // 
+                var user = await _userManager.GetUserAsync(HttpContext.User); /// pegar usuario                                                          // 
                 await _userManager.AddToRoleAsync(user, "Admin"); //colocar regra e usuario
 
                 _logger.LogInformation("Login Criado com Sucesso");

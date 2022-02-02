@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetMvcRoles.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin, Root")]
     public class SedesController : Controller
     {
         private readonly ApplicationDbContext _context;

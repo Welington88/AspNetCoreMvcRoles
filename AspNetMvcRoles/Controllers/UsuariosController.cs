@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetMvcRoles.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Root")]
     public class UsuariosController : Controller
     {
         private readonly ApplicationDbContext _context;
